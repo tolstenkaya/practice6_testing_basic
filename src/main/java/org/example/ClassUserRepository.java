@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassUserRepository {
+public class ClassUserRepository implements IUserRepository {
     List<User> users = new ArrayList<User>();
 
     public boolean isEmailExistsInDatabase(String email){
@@ -16,5 +16,10 @@ public class ClassUserRepository {
 
     public void saveUser(User new_user){
         users.add(new_user);
+    }
+
+    public User findByEmail(String email){
+        User user = users.stream().filter(u->u.email.equals(email)).findFirst().orElse(null);
+        return user;
     }
 }
